@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        #mydiv {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Add Student</h1>
+        <a href="index.html">Back to Home</a>
+        <form>
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname"><br><br>
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname"><br><br>
+
+            <label for="gpa">GPA:</label>
+            <input type="text" id="gpa" name="gpa"><br><br>
+
+            <label for="enrolled">Enrolled:</label>
+            <input type="text" id="enrolled" name="enrolled"><br><br>
+
+            <button type="button" onclick="sendStudent()">Submit</button>
+        </form>
+        <div id="mydiv" name="mydiv"></div>
+    </div>
+    <script>
+        function sendStudent() {
+            var fname_val = $("#fname").val();
+            var lname_val = $("#lname").val();
+            var gpa_val = $("#gpa").val();
+            var enrolled_val = $("#enrolled").val();
+
+            $.ajax({
+                url: "/students", // Update the URL to match your server endpoint
+                type: "post",
+                data: {
+                    first_name: fname_val,
+                    last_name: lname_val,
+                    gpa: gpa_val,
+                    enrolled: enrolled_val
+                },
+                success: function(response) {
+                    console.log(response)
+                    $("#mydiv").text(response.message);
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText)
+                    $("#mydiv").text('Error: ' + xhr.responseText);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
