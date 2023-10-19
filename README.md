@@ -19,3 +19,8 @@ To view studentserver webpage:
 
 To view studentserver api-docs:
 Go to the link "http://localhost:5678/api-docs/" on your browser.
+
+
+Project Linked video!
+
+https://youtu.be/fMzg4WzGp6U
